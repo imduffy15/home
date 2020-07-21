@@ -1,0 +1,15 @@
+logLevel: debug
+policy: sync
+
+provider: pdns
+
+sources:
+  - service
+  - ingress
+
+txtOwnerId: ianduffy
+registry: txt
+
+pdns:
+  apiUrl: "http://powerdns-http.default.svc.cluster.local"
+  apiPort: "8081"

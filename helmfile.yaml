@@ -1,0 +1,133 @@
+repositories:
+#   - name: stable
+#     url: https://kubernetes-charts.storage.googleapis.com
+#   - name: jetstack
+#     url: https://charts.jetstack.io
+#   - name: appscode
+#     url: https://charts.appscode.com/stable/
+#   - name: billimek
+#     url: https://billimek.com/billimek-charts/
+  - name: halkeye
+    url: https://halkeye.github.io/helm-charts/
+  - name: ianduffy
+    url: https://imduffy15.github.io/charts
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+helmDefaults:
+  tillerNamespace: kube-system
+  tillerless: false
+
+templates:
+  default: &default
+    missingFileHandler: Warn
+    values:
+    - config/{{`{{ .Release.Name }}`}}/values.yaml
+    - config/{{`{{ .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}.yaml
+    - config/{{`{{ .Release.Name }}`}}/values.yaml.gotmpl
+    - config/{{`{{ .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}.yaml.gotmpl
+    secrets:
+    - secrets/{{`{{ .Release.Name }}`}}/secrets.yaml
+    - secrets/{{`{{ .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}-secrets.yaml
+    - secrets/{{`{{ .Release.Name }}`}}/secrets.yaml.gotmpl
+    - secrets/{{`{{ .Release.Name }}`}}/{{`{{ .Environment.Name }}`}}-secrets.yaml.gotmpl
+
+releases:
+  - name: kubed
+    namespace: kube-system
+    chart: appscode/kubed
+    version: 0.12.0
+    <<: *default
+  - name: external-dns
+    namespace: kube-system
+    chart: bitnami/external-dns
+    version: 3.2.5
+    <<: *default
+  - name: nginx-ingress-tmp
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: nginx-ingress-management
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: nginx-ingress-main
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: nginx-ingress-iot
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: nginx-ingress-lot
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: nginx-ingress-guest
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
+  - name: cert-manager
+    namespace: kube-system
+    chart: jetstack/cert-manager
+    version: 0.15.2
+    wait: true
+    force: true
+    atomic: true
+    recreatePods: true
+    <<: *default
+  - name: metallb
+    namespace: kube-system
+    chart: stable/metallb
+    version: 0.12.0
+    <<: *default
+  - name: prometheus-operator
+    namespace: kube-system
+    chart: stable/prometheus-operator
+    version: 9.1.1
+    <<: *default
+  - name: home-assistant
+    namespace: default
+    chart: ianduffy/home-assistant
+    version: 1.0.3
+    <<: *default
+  - name: mosquitto
+    namespace: default
+    chart: ianduffy/mosquitto
+    version: 0.0.1
+    <<: *default
+  - name: tasmoadmin
+    namespace: default
+    chart: ianduffy/tasmoadmin
+    version: 0.0.1
+    <<: *default
+  - name: powerdns
+    namespace: default
+    chart: ianduffy/powerdns
+    version: 0.0.1
+    <<: *default
+  - name: secrets
+    namespace: default
+    chart: ./charts/secrets
+    <<: *default
+  - name: certificates
+    namespace: shared
+    chart: ./charts/certificates
+    wait: true
+    force: true
+    atomic: true
+    recreatePods: true
+    needs:
+      - kube-system/cert-manager
+    hooks:
+      - events: ["prepare"]
+        command: "sh"
+        args: ["-c", "kubectl create namespace shared || true"]
+    <<: *default
+

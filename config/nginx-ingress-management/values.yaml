@@ -1,0 +1,27 @@
+controller:
+  ingressClass: nginx-management
+  config:
+    proxy-next-upstream: "error timeout http_500"
+    proxy-next-upstream-tries: "3"
+    proxy-next-upstream-timeout: "10"
+    enable-brotli: "true"
+    hsts-max-age: "0"
+    hsts-preload: "true"
+    server-tokens: "false"
+  service:
+    externalTrafficPolicy: Cluster
+    type: LoadBalancer
+  publishService:
+    enabled: true
+  stats:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"

@@ -1,0 +1,35 @@
+hostNetwork: true
+
+ingress:
+  enabled: true
+  path: /
+
+configurator:
+  enabled: true
+  image:
+    repository: causticlab/hass-configurator-docker
+    tag: 0.4.0-x86_64
+    pullPolicy: IfNotPresent
+  extraEnv:
+    HC_GIT: true
+  ingress:
+    enabled: true
+    path: /
+
+monitoring:
+  enabled: true
+
+appdaemon:
+  enabled: true
+  ingress:
+    enabled: true
+    path: /
+
+git:
+  enabled: true
+
+  user:
+    name: "Ian Duffy"
+    email: "ian@ianduffy.ie"
+
+  repo: git@github.com:imduffy15/home-assistant-config.git

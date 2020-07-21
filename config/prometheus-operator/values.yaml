@@ -1,0 +1,11 @@
+alertmanager:
+  ingress:
+    enabled: true
+
+grafana:
+  ingress:
+    enabled: true
+
+prometheus:
+  ingress:
+    enabled: true

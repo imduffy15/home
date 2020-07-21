@@ -1,0 +1,12 @@
+apiserver:
+  enabled: false
+
+criticalAddon: true
+
+enableAnalytics: false
+
+rbac:
+  create: true
+
+config:
+  clusterName: home
