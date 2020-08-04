@@ -112,6 +112,11 @@ releases:
     chart: ianduffy/powerdns
     version: 0.0.1
     <<: *default
+  - name: tvheadend
+    namespace: default
+    chart: ianduffy/tvheadend
+    version: 0.0.1
+    <<: *default
   - name: secrets
     namespace: default
     chart: ./charts/secrets
