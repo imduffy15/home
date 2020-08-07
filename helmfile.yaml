@@ -48,6 +48,11 @@ releases:
     chart: stable/nginx-ingress
     version: 1.41.1
     <<: *default
+  - name: nginx-ingress-dmz
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.41.1
+    <<: *default
   - name: nginx-ingress-management
     namespace: kube-system
     chart: stable/nginx-ingress
