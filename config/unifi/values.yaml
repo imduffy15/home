@@ -1,0 +1,19 @@
+image:
+  tag: 5.14
+
+captivePortalService:
+  enabled: true
+  ingress:
+    enabled: true
+
+controllerService:
+  type: LoadBalancer
+
+stunService:
+  type: LoadBalancer
+
+discoveryService:
+  type: LoadBalancer
+
+ingress:
+  enabled: true

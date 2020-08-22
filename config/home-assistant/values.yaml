@@ -2,7 +2,7 @@ hostNetwork: true
 
 image:
   repository: homeassistant/home-assistant
-  tag: beta
+  tag: stable
 
 ingress:
   enabled: true

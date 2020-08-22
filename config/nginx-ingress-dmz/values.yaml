@@ -9,7 +9,7 @@ controller:
     hsts-preload: "true"
     server-tokens: "false"
   service:
-    externalTrafficPolicy: Cluster
+    externalTrafficPolicy: Local
     type: LoadBalancer
   publishService:
     enabled: true
