@@ -4,7 +4,7 @@ securityContext:
   enabled: true
 cainjector:
   enabled: true
-installCRDs: true
+installCRDs: false
 
 podDnsPolicy: "None"
 podDnsConfig:

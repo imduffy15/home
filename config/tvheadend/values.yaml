@@ -1,5 +1,39 @@
+image:
+  repository: linuxserver/tvheadend
+  tag: latest
+  pullPolicy: Always
+
+extraEnv:
+  TZ: "Europe/Dublin"
+  PUID: 0
+  PGID: 0
+
+hostNetwork: true
+
+securityContext:
+  privileged: true
+
+service:
+  type: LoadBalancer
+  ports:
+    http: 9981
+    htsp: 9982
+  targetPorts:
+    http: http
+    htsp: htsp
+
 persistence:
-  data:
-    enabled: true
   config:
     enabled: true
+    mountPath: /config
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+hostMounts:
+  - mountPath: /recordings
+    hostPath: /mnt/media
+    name: recordings
+  - name: tuners
+    hostPath: /dev/dvb
+  - name: direct-rendering
+    hostPath: /dev/dri

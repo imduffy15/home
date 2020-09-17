@@ -1,22 +1,24 @@
 repositories:
-  - name: stable
-    url: https://kubernetes-charts.storage.googleapis.com
-  - name: jetstack
-    url: https://charts.jetstack.io
-  - name: appscode
-    url: https://charts.appscode.com/stable/
-  - name: billimek
-    url: https://billimek.com/billimek-charts/
-  - name: halkeye
-    url: https://halkeye.github.io/helm-charts/
-  - name: ianduffy
-    url: https://imduffy15.github.io/charts
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
-
-helmDefaults:
-  tillerNamespace: kube-system
-  tillerless: false
+  # - name: stable
+  #   url: https://kubernetes-charts.storage.googleapis.com
+  # - name: jetstack
+  #   url: https://charts.jetstack.io
+  # - name: appscode
+  #   url: https://charts.appscode.com/stable/
+  # - name: billimek
+  #   url: https://billimek.com/billimek-charts/
+  # - name: halkeye
+  #   url: https://halkeye.github.io/helm-charts/
+  # - name: ianduffy
+  #   url: https://imduffy15.github.io/charts
+  # - name: bitnami
+  #   url: https://charts.bitnami.com/bitnami
+  # - name: ingress-nginx
+  #   url: https://kubernetes.github.io/ingress-nginx
+  # - name: prometheus-community
+  #   url: https://prometheus-community.github.io/helm-charts
+  # - name: k8s-at-home
+  #   url: https://k8s-at-home.com/charts/
 
 templates:
   default: &default
@@ -45,43 +47,43 @@ releases:
     <<: *default
   - name: nginx-ingress-tmp
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-dmz
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-management
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-main
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-iot
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-lot
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: nginx-ingress-guest
     namespace: kube-system
-    chart: stable/nginx-ingress
-    version: 1.41.1
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
     <<: *default
   - name: cert-manager
     namespace: kube-system
-    chart: jetstack/cert-manager
-    version: 0.15.2
+    chart: ianduffy/cert-manager
+    version: 1.0.1
     wait: true
     force: true
     atomic: true
@@ -89,13 +91,13 @@ releases:
     <<: *default
   - name: metallb
     namespace: kube-system
-    chart: stable/metallb
-    version: 0.12.0
+    chart: bitnami/metallb
+    version: 0.1.23
     <<: *default
   - name: prometheus-operator
     namespace: kube-system
-    chart: stable/prometheus-operator
-    version: 9.1.1
+    chart: prometheus-community/kube-prometheus-stack
+    version: 9.4.3
     <<: *default
   - name: home-assistant
     namespace: default
@@ -105,7 +107,7 @@ releases:
   - name: mosquitto
     namespace: default
     chart: ianduffy/mosquitto
-    version: 0.0.1
+    version: 0.0.5
     <<: *default
   - name: tasmoadmin
     namespace: default
@@ -115,17 +117,17 @@ releases:
   - name: powerdns
     namespace: default
     chart: ianduffy/powerdns
-    version: 0.0.1
+    version: 0.0.2
     <<: *default
   - name: tvheadend
     namespace: default
-    chart: ianduffy/tvheadend
-    version: 0.0.1
+    chart: ianduffy/generic
+    version: 0.0.7
     <<: *default
   - name: unifi
     namespace: default
-    chart: stable/unifi
-    version: 0.10.0
+    chart: k8s-at-home/unifi
+    version: 1.0.0
     <<: *default
   - name: secrets
     namespace: default

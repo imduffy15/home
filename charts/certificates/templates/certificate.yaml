@@ -1,7 +1,7 @@
 {{- $root := . -}}
 {{- range $index, $cert := .Values.certificates }}
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   labels: {{ include "certificates.labels" $root | nindent 4 }}
