@@ -1,5 +1,5 @@
 controller:
-  ingressClass: nginx-dmz
+  ingressClass: nginx-dmz-redirect
   config:
     proxy-next-upstream: "error timeout http_500"
     proxy-next-upstream-tries: "3"
@@ -11,6 +11,9 @@ controller:
   service:
     externalTrafficPolicy: Cluster
     type: LoadBalancer
+    ports:
+      http: 8800
+      https: 8843
   publishService:
     enabled: true
   stats:

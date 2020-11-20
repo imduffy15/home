@@ -55,6 +55,11 @@ releases:
     chart: ingress-nginx/ingress-nginx
     version: 3.1.0
     <<: *default
+  - name: nginx-ingress-dmz-redirect
+    namespace: kube-system
+    chart: ingress-nginx/ingress-nginx
+    version: 3.1.0
+    <<: *default
   - name: nginx-ingress-management
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
@@ -82,8 +87,8 @@ releases:
     <<: *default
   - name: cert-manager
     namespace: kube-system
-    chart: ianduffy/cert-manager
-    version: 1.0.1
+    chart: jetstack/cert-manager
+    version: 1.0.3
     wait: true
     force: true
     atomic: true
@@ -91,8 +96,8 @@ releases:
     <<: *default
   - name: metallb
     namespace: kube-system
-    chart: bitnami/metallb
-    version: 0.1.23
+    chart: stable/metallb
+    version: 0.12.0
     <<: *default
   - name: prometheus-operator
     namespace: kube-system
@@ -107,7 +112,7 @@ releases:
   - name: mosquitto
     namespace: default
     chart: ianduffy/mosquitto
-    version: 0.0.5
+    version: 0.0.6
     <<: *default
   - name: tasmoadmin
     namespace: default
@@ -119,10 +124,20 @@ releases:
     chart: ianduffy/powerdns
     version: 0.0.2
     <<: *default
-  - name: tvheadend
+  # - name: tvheadend
+  #   namespace: default
+  #   chart: ianduffy/generic
+  #   version: 0.0.7
+  #   <<: *default
+  # - name: spc-web-gateway
+  #   namespace: default
+  #   chart: ianduffy/generic
+  #   version: 0.0.7
+  #   <<: *default
+  - name: imgproxy
     namespace: default
-    chart: ianduffy/generic
-    version: 0.0.7
+    chart: ianduffy/imgproxy
+    version: 0.5.9
     <<: *default
   - name: unifi
     namespace: default
@@ -132,6 +147,10 @@ releases:
   - name: secrets
     namespace: default
     chart: ./charts/secrets
+    <<: *default
+  - name: docker-registry
+    namespace: default
+    chart: stable/docker-registry
     <<: *default
   - name: certificates
     namespace: shared
