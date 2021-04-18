@@ -1,0 +1,9 @@
+image:
+  repository: images.home.ianduffy.ie/spc-web-gateway
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets:
+  - name: secrets-local-docker-registry-credentials
+
+secretMountPath: /opt/spc-web-gateway/auth/

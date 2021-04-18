@@ -1,0 +1,49 @@
+version: v0.138.4
+dependencies:
+- name: cert-manager
+  repository: https://charts.jetstack.io
+  version: v1.0.3
+- name: docker-registry
+  repository: https://charts.helm.sh/stable
+  version: 1.9.6
+- name: external-dns
+  repository: https://charts.bitnami.com/bitnami
+  version: 3.2.5
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 3.29.0
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 9.4.3
+- name: kubed
+  repository: https://charts.appscode.com/stable/
+  version: v0.12.0
+- name: metallb
+  repository: https://charts.helm.sh/stable
+  version: 0.12.0
+- name: unifi
+  repository: https://k8s-at-home.com/charts/
+  version: 1.0.0
+- name: zigbee2mqtt
+  repository: https://k8s-at-home.com/charts/
+  version: 4.1.2
+digest: sha256:f861b0ccf12127fbbc5f4fd9de9cb35f5bd79ca9804ca071db3c77ed2001e838
+generated: "2021-04-19T00:21:09.744986+01:00"

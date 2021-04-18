@@ -1,0 +1,11 @@
+externalName: ""
+externalIP: ""
+externalPort: ""
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts: []
+  tls: []
+
+ports: []

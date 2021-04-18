@@ -1,0 +1,39 @@
+{{- $root := . -}}
+{{- range $index, $service := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mosquitto.fullname" $root }}-{{ $index }}
+{{- if $service.annotations }}
+  annotations:
+  {{- range $key, $value := $service.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+{{- end }}
+  labels:
+{{ include "mosquitto.labels" $root | indent 4 }}
+spec:
+  type: {{ $service.type }}
+  loadBalancerIP: {{ $service.address }}
+  ports:
+    - port: {{ $root.Values.service.ports.mqtt }}
+      targetPort: {{ $root.Values.service.targetPorts.mqtt }}
+      protocol: TCP
+      name: mqtt
+    - port: {{ $root.Values.service.ports.websocket }}
+      targetPort: {{ $root.Values.service.targetPorts.websocket }}
+      protocol: TCP
+      name: websocket
+    - port: {{ $root.Values.service.ports.mqtts }}
+      targetPort: {{ $root.Values.service.targetPorts.mqtts }}
+      protocol: TCP
+      name: mqtts
+    - port: {{ $root.Values.service.ports.websockets }}
+      targetPort: {{ $root.Values.service.targetPorts.websockets }}
+      protocol: TCP
+      name: websockets      
+  selector:
+    app.kubernetes.io/name: {{ include "mosquitto.name" $root }}
+    app.kubernetes.io/instance: {{ $root.Release.Name }}
+{{- end }}
