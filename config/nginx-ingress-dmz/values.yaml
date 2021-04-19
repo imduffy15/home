@@ -25,3 +25,7 @@ controller:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
+
+tcp:
+  8000: "default/external-service-nvr-service-port:8000"
+  554: "default/external-service-nvr-rtsp:554"

@@ -1,0 +1,32 @@
+{{- if .Values.ingress.enabled -}}
+{{- $root := . -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  labels: {{ include "externalService.labels" $root | nindent 4 }}
+  name: {{ include "externalService.fullname" $root }}
+{{- with .Values.ingress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+{{- if .Values.ingress.tls }}
+  tls:
+  {{- range .Values.ingress.tls }}
+    - hosts:
+      {{- range .hosts }}
+        - {{ . | quote }}
+      {{- end }}
+      secretName: {{ .secretName }}
+  {{- end }}
+{{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ include "externalService.fullname" $root }}
+              servicePort: {{ $root.Values.externalPort }}
+  {{- end }}
+{{- end }}

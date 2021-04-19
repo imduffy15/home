@@ -1,24 +1,22 @@
 repositories:
-  # - name: stable
-  #   url: https://kubernetes-charts.storage.googleapis.com
-  # - name: jetstack
-  #   url: https://charts.jetstack.io
-  # - name: appscode
-  #   url: https://charts.appscode.com/stable/
-  # - name: billimek
-  #   url: https://billimek.com/billimek-charts/
-  # - name: halkeye
-  #   url: https://halkeye.github.io/helm-charts/
-  # - name: ianduffy
-  #   url: https://imduffy15.github.io/charts
-  # - name: bitnami
-  #   url: https://charts.bitnami.com/bitnami
-  # - name: ingress-nginx
-  #   url: https://kubernetes.github.io/ingress-nginx
-  # - name: prometheus-community
-  #   url: https://prometheus-community.github.io/helm-charts
-  # - name: k8s-at-home
-  #   url: https://k8s-at-home.com/charts/
+  - name: stable
+    url: https://charts.helm.sh/stable
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: appscode
+    url: https://charts.appscode.com/stable/
+  - name: billimek
+    url: https://billimek.com/billimek-charts/
+  - name: halkeye
+    url: https://halkeye.github.io/helm-charts/
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: k8s-at-home
+    url: https://k8s-at-home.com/charts/
 
 templates:
   default: &default
@@ -45,45 +43,40 @@ releases:
     chart: bitnami/external-dns
     version: 3.2.5
     <<: *default
-  - name: nginx-ingress-tmp
-    namespace: kube-system
-    chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
-    <<: *default
   - name: nginx-ingress-dmz
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-dmz-redirect
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-management
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-main
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-iot
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-lot
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: nginx-ingress-guest
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 3.1.0
+    version: 3.29.0
     <<: *default
   - name: cert-manager
     namespace: kube-system
@@ -106,37 +99,36 @@ releases:
     <<: *default
   - name: home-assistant
     namespace: default
-    chart: ianduffy/home-assistant
-    version: 1.0.3
+    chart: ./charts/home-assistant
+    version: 1.0.4
     <<: *default
   - name: mosquitto
     namespace: default
-    chart: ianduffy/mosquitto
-    version: 0.0.6
+    chart: ./charts/mosquitto
     <<: *default
   - name: tasmoadmin
     namespace: default
-    chart: ianduffy/tasmoadmin
+    chart: ./charts/tasmoadmin
     version: 0.0.1
     <<: *default
   - name: powerdns
     namespace: default
-    chart: ianduffy/powerdns
+    chart: ./charts/powerdns
     version: 0.0.2
     <<: *default
-  # - name: tvheadend
-  #   namespace: default
-  #   chart: ianduffy/generic
-  #   version: 0.0.7
-  #   <<: *default
-  # - name: spc-web-gateway
-  #   namespace: default
-  #   chart: ianduffy/generic
-  #   version: 0.0.7
-  #   <<: *default
+  - name: tvheadend
+    namespace: default
+    chart: ./charts/generic
+    version: 0.0.7
+    <<: *default
+  - name: spc-web-gateway
+    namespace: default
+    chart: ./charts/generic
+    version: 0.0.7
+    <<: *default
   - name: imgproxy
     namespace: default
-    chart: ianduffy/imgproxy
+    chart: ./charts/imgproxy
     version: 0.5.9
     <<: *default
   - name: unifi
@@ -144,9 +136,26 @@ releases:
     chart: k8s-at-home/unifi
     version: 1.0.0
     <<: *default
+  - name: zigbee2mqtt
+    namespace: default
+    chart: k8s-at-home/zigbee2mqtt
+    version: 4.1.2
+    <<: *default
   - name: secrets
     namespace: default
     chart: ./charts/secrets
+    <<: *default
+  - name: external-service-nvr-http
+    namespace: default
+    chart: ./charts/external-service
+    <<: *default
+  - name: external-service-nvr-rtsp
+    namespace: default
+    chart: ./charts/external-service
+    <<: *default
+  - name: external-service-nvr-service-port
+    namespace: default
+    chart: ./charts/external-service
     <<: *default
   - name: docker-registry
     namespace: default
